@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import listEndpoints from "express-list-endpoints"
 import cors from "cors"
 import blogRouter from "./services/blogs/index.js"
+import authorsRouter from "./services/authors/index.js"
 
 const server = express()
 const port = process.env.PORT || 3001
@@ -13,6 +14,7 @@ server.use(express.json())
 
 // ****************** ENDPOINTS  *********************
 server.use("/blogs", blogRouter)
+server.use("/authors", authorsRouter)
 
 // ****************** ERROR HANDLERS *********************
 

@@ -1,6 +1,6 @@
 import { createError } from "http-errors"
 import atob from "atob"
-import BlogsModel from "../services/blogs/index.js"
+import AuthorsModel from "../services/authors/index.js"
 
 export const basicAuthMiddleware = async (req, res, next) => {
   if (req.headers.authorization) {
@@ -8,7 +8,7 @@ export const basicAuthMiddleware = async (req, res, next) => {
     const { email, password } = atob(base64Credentials).split(":")
     console.log(`EMAIL: ${email}, PASSWORD: ${password}`)
 
-    const user = await BlogsModel.checkCretials(email, password)
+    const user = await AuthorsModel.checkCretials(email, password)
     if (user) {
       req.user = user
       next()
