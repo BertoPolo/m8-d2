@@ -4,6 +4,7 @@ import uniqid from "uniqid"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 import Authors from "./schema.js"
+import { basicAuthMiddleware } from "../../auth/basic.js"
 
 const __filename = fileURLToPath(import.meta.url)
 
@@ -14,7 +15,7 @@ const authorsFilePath = path.join(__dirname, "authors.json")
 const authorsRouter = express.Router()
 
 // get all authors
-authorsRouter.get("/", async (req, res, next) => {
+authorsRouter.get("/", basicAuthMiddleware, async (req, res, next) => {
   try {
     const authors = await Authors.find({})
     res.send(authors)
